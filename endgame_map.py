@@ -172,13 +172,7 @@ class Game(Widget):
         print('the angle in reset is',self.car.angle)
         print("Car position in reset {} and {}".format(self.car.x,self.car.y))
         img = sand[int(self.car.x)-30:int(self.car.x)+30, int(self.car.y)-30 : int(self.car.y)+30]
-        # image = cv2.imread('C:/Users/nihar/Downloads/endgame_nihar/endgame/images/mask_car.png')
-        # image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-        # overlay = imutils.rotate(image,self.car.angle)
-        # rows,cols = overlay.shape
-        # #overlay=cv2.addWeighted(img[30:30+rows, 30:30+cols],0.5,overlay,0.5,0)
-        # img[30:30+rows, 30:30+cols ] = overlay
-        width = int(img.shape[1] *(2/3) )
+        
         height = int(img.shape[0] *(2/3) )
         dimension = (width, height)
         rescaled = cv2.resize(img,dimension, interpolation = cv2.INTER_AREA)
@@ -194,13 +188,7 @@ class Game(Widget):
         if int(self.car.x) > 29 and int(self.car.x) < 1400 and int(self.car.y) > 29 and int(self.car.y) < 631:  
             #print('gone from here up')          - nk 27th Apr
             img = sand[int(self.car.x)-30:int(self.car.x)+30, int(self.car.y)-30 : int(self.car.y)+30]
-            # image = cv2.imread('C:/Users/nihar/Downloads/endgame_nihar/endgame/images/mask_car.png')
-            # image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-            # overlay = imutils.rotate(image,self.car.angle)
-            # rows,cols = overlay.shape
-            # #overlay=cv2.addWeighted(img[30:30+rows, 30:30+cols],0.5,overlay,0.5,0)
-            # img[30:30+rows, 30:30+cols ] = overlay
-            width = int(img.shape[1] *(2/3) )
+           
             height = int(img.shape[0] *(2/3) )
             dimension = (width, height)
             rescaled = cv2.resize(img,dimension, interpolation = cv2.INTER_AREA)
@@ -212,22 +200,14 @@ class Game(Widget):
             self.car.y = reset_position[1]
             #print('gone from here up else ===================' ,reset_position)         - nk 27th Apr
             img = sand[int(self.car.x)-30:int(self.car.x)+30, int(self.car.y)-30 : int(self.car.y)+30]
-            # image = cv2.imread('C:/Users/nihar/Downloads/endgame_nihar/endgame/images/mask_car.png')
-            # image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-            # overlay = imutils.rotate(image,self.car.angle)
-            # rows,cols = overlay.shape
-            # #overlay=cv2.addWeighted(img[30:30+rows, 30:30+cols],0.5,overlay,0.5,0)
-            # img[30:30+rows, 30:30+cols ] = overlay
+            
             width = int(img.shape[1] *(2/3) )
             height = int(img.shape[0] *(2/3) )
             dimension = (width, height)
             rescaled = cv2.resize(img,dimension, interpolation = cv2.INTER_AREA)
             #done = True 
             return rescaled
-            #return sand[int(self.car.x)-14:int(self.car.x)+14,int(self.car.y)-14:int(self.car.y)+14]
-        #else:
-         #   return sand[int(self.car.x)-28:int(self.car.x)-14, int(self.car.y)-28 : int(self.car.y)-14]
-
+            
     def take_step(self,action,last_distance,episode_step):
         global car_prev_x
         global car_prev_y
@@ -242,12 +222,7 @@ class Game(Widget):
         #print("=="*100)             - nk 27th Apr
         self.car.move(rotation)
         img = sand[int(self.car.x)-30:int(self.car.x)+30, int(self.car.y)-30 : int(self.car.y)+30]
-        # image = cv2.imread('C:/Users/nihar/Downloads/endgame_nihar/endgame/images/mask_car.png')
-        # image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-        # overlay = imutils.rotate(image,self.car.angle)
-        # rows,cols = overlay.shape
-        # #overlay=cv2.addWeighted(img[30:30+rows, 30:30+cols],0.5,overlay,0.5,0)
-        # img[30:30+rows, 30:30+cols ] = overlay
+        
         if int(self.car.x) > 29 and int(self.car.x) < 1400 and int(self.car.y) > 29 and int(self.car.y) < 631:
             width = int(img.shape[1] *(2/3))
             height = int(img.shape[0] *(2/3) )
@@ -258,21 +233,7 @@ class Game(Widget):
             new_state = img
             print("stuck near border{}".format(new_state))
             reward += -10.0
-        #new_state = sand[int(self.car.x)-14:int(self.car.x)+14, int(self.car.y)-14 : int(self.car.y)+14]
-        '''
-        if int(self.car.x) > 15 and int(self.car.x) < 1429 and int(self.car.y) > 15 and int(self.car.y) < 661:
-            
-            new_state = sand[int(self.car.x)-14:int(self.car.x)+14, int(self.car.y)-14 : int(self.car.y)+14]
-        else:
-            value =   random_positions[randint(2,15)]
-            car_prev_x = value[0]
-            car_prev_y = value[1]
-            new_state = sand[int(car_prev_x)-14:int(car_prev_x)+14,int(car_prev_y)-14:int(car_prev_y)+14]
-            #self.car.x = int(car_prev_x)
-            #self.car.y = int(car_prev_x)
-            
-            print("stuck near border{}".format(new_state))
-        '''
+        
         distance = np.sqrt((self.car.x - goal_x)**2 + (self.car.y - goal_y)**2)
         print(1, goal_x, goal_y, distance, int(self.car.x),int(self.car.y), im.read_pixel(int(self.car.x),int(self.car.y)))
         if distance < 25:
@@ -451,13 +412,8 @@ class Game(Widget):
         current_state .append(curr_state_orientation[0])
         current_state .append(curr_state_orientation[1])
         if timestep < 10000 : 
-            #current_state = self.get_state()
-            #action = max_action*randrange(-1,1)
             action = max_action*random.uniform(-1, 1)
         else:
-            
-          #  print('current state before calling action is', current_state.shape)
-            #image = cv2.imread('C:/Users/nihar/Downloads/endgame_nihar/endgame/images/mask_car.png')
             action = policy.select_action(np.array(current_state))
         
         new_state,reward,done,episode_step = self.take_step(action,last_distance,episode_step)
@@ -469,44 +425,19 @@ class Game(Widget):
         #    episode_step = 0
 
         episode_reward += reward
-        #print('the shape of state is', current_state.shape)
-        #print('the shape of new state is', new_state.shape)   - nk 27th Apr
-        #current_state = resize(current_state, (28, 28))
-        #current_state = current_state.ravel()
-        if len(new_state.ravel()) == 1600:
+        
             #print('=========',rows,cols)
             new_state[0:0+rows, 20:20+cols ] = overlay
         new_state = new_state.ravel()
-        #print('the shape of state is', current_state.shape)
-        #print('the shape of new state is', new_state.shape)        - nk 27th Apr
-        #print('the shape of state is', new_state.shape[0])         - nk 27th Apr
-        #print('type of current state is', type(current_state))     - nk 27th Apr
-        #print('type of temp state is', type(temp_state))           - nk 27th Apr
+        
         if len(current_state) != 1600:
-            #shape1 = new_state.shape[0]
-            #temp_state[0][0:shape1] = new_state[0][0:shape1]
+            
             current_state = np.ones(1600).ravel()
-            #np.ones(image_size).ravel()
-            #temp_state = np.ones((1, 1600))
-        #print('the shape of state after is', new_state.shape)  - nk 27th Apr
-
+            
         if len(new_state) != 1600:
-            #shape1 = new_state.shape[0]
-            #no_of_pixels = 1600 - new_state.shape[0]
-            #temp_state[0][0:shape1] = new_state[0][0:shape1]
+            
             new_state = np.ones(1600).ravel()
-        #print('the shape of new state after is', new_state.shape)     - nk 27th Apr
-        # img = PILImage.open("./images/mask_car.png")
-        # img = img.rotate(self.car.angle)
-        # #background = current_state
-        # size = (40,40)
-        # current_state = current_state.resize(size,PILImage.ANTIALIAS)
-        # current_state.paste(img, (0,20), img)
-        # new_state = new_state.resize(size,PILImage.ANTIALIAS)
-        # new_state.paste(img, (0,20), img)
-        # print(' i am able to properly superimpose')
-
-        #current_state[0:0+rows, 20:20+cols ] = overlay
+        
         current_state=list(current_state)
         current_state .append(curr_state_orientation[0])
         current_state .append(curr_state_orientation[1])
@@ -514,14 +445,7 @@ class Game(Widget):
         new_state = list(new_state)
         new_state .append(next_state_orientation[0])
         new_state .append(next_state_orientation[1])
-        #new_state[785] = next_state_orientation[1]
-
-        #print('the shape of action is', len(int(action)))
-        #print('the shape of reward is', len(int(reward)))
-        #print('the shape of done is', len(done))
-        #current_state = np.reshape(current_state, (-1, 28))
-        #print('the new shape of state is', len(current_state))          - nk 27th Apr
-        #print('the new shape of state is', len(new_state))              - nk 27th Apr
+       
         replay_buffer.add((current_state,new_state,action,reward,done))
 
         current_state = new_state
